@@ -77,14 +77,14 @@ def plot2(x, logistic_params, covariance):
 	st.pyplot()
 	
 def forcast(t):
-	return round(logistic_curve(today + t, *logistic_params) - logistic_curve(today - 1 + t, *logistic_params), 0)
+	return logistic_curve(today + t, *logistic_params) - logistic_curve(today - 1 + t, *logistic_params)
 
 st.warning('初始條件：' + str(date[0]) + '～' + str(date[-1]))
 
 plot1(x, logistic_params, covariance)
 plot2(x, logistic_params, covariance)
 
-table = np.ones([20,2], dtype=np.uint16)
+table = np.ones([20,2], dtype=np.uint32)
 
 for i in range(1, 15):
 	table[i-1, 0] = i
@@ -93,7 +93,6 @@ for i in range(1, 15):
 for i in range(1, 7):
 	table[i+13, 0] = i * 15
 	table[i+13, 1] = forcast(i * 15)
-
 
 df = pd.DataFrame(
     table,
