@@ -94,7 +94,7 @@ for i in range(1, 15):
 for i in range(1, 7):
 	table[i+13, 0] = i * 15
 	table[i+13, 1] = forcast(i * 15)
-	table[i+13, 2] = logistic_curve(today + i, *logistic_params)
+	table[i+13, 2] = logistic_curve(today + (i * 15), *logistic_params)
 
 df = pd.DataFrame(
     table,
