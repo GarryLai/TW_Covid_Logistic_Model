@@ -84,19 +84,21 @@ st.warning('初始條件：' + str(date[0]) + '～' + str(date[-1]))
 plot1(x, logistic_params, covariance)
 plot2(x, logistic_params, covariance)
 
-table = np.ones([20,2], dtype=np.uint32)
+table = np.ones([20,3], dtype=np.uint32)
 
 for i in range(1, 15):
 	table[i-1, 0] = i
 	table[i-1, 1] = forcast(i)
+	table[i-1, 2] = logistic_curve(today + i, *logistic_params)
 
 for i in range(1, 7):
 	table[i+13, 0] = i * 15
 	table[i+13, 1] = forcast(i * 15)
+	table[i+13, 2] = logistic_curve(today + i, *logistic_params)
 
 df = pd.DataFrame(
     table,
-    columns=['預測日數', '推估確診'])
+    columns=['預測日數', '推估確診', '累計確診'])
 st.table(df)
 
 hide_table_row_index = """
