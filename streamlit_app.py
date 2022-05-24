@@ -33,7 +33,8 @@ for i in data[::-1]:
 	
 x = np.arange(0, len(date))
 today = len(date) - 1
-days = len(date) + 90
+start_day = 90
+days = 243
 
 def logistic_curve(x, a, b, c, d, i):
 	return (a / np.power(1 + i * np.exp(-c * (x - d)), i)) + b
@@ -44,7 +45,7 @@ logistic_params, covariance = curve_fit(logistic_curve, x, total)
 
 def plot1(x, logistic_params, covariance):
 	plt.bar(x, diagnosed)
-	plt.xlim([0, days])
+	plt.xlim([start_day, days])
 	dtFmt = mdates.DateFormatter('%m-%d')
 	plt.gca().xaxis.set_major_formatter(dtFmt) 
 	plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=10))
@@ -52,7 +53,7 @@ def plot1(x, logistic_params, covariance):
 	plt.xlabel('Date')
 	plt.ylabel('Number of Case')
 	plt.title('COVID-19 Confirmed Case in Taiwan (2022)')
-	x = np.arange(0, days)
+	x = np.arange(start_day, days)
 	y = logistic_curve(x, *logistic_params) - logistic_curve(x-1, *logistic_params)
 	plt.plot(x, y, color = 'r', label='Model')
 	plt.legend(loc='best', fontsize=20)
@@ -61,7 +62,7 @@ def plot1(x, logistic_params, covariance):
 
 def plot2(x, logistic_params, covariance):
 	plt.bar(x, total)
-	plt.xlim([0, days])
+	plt.xlim([start_day, days])
 	dtFmt = mdates.DateFormatter('%m-%d')
 	plt.gca().xaxis.set_major_formatter(dtFmt) 
 	plt.gca().xaxis.set_major_locator(mdates.DayLocator(interval=10))
@@ -69,7 +70,7 @@ def plot2(x, logistic_params, covariance):
 	plt.xlabel('Date')
 	plt.ylabel('Number of Case')
 	plt.title('COVID-19 Total Confirmed Case in Taiwan (2022)')
-	x = np.arange(0, days)
+	x = np.arange(start_day, days)
 	y = logistic_curve(x, *logistic_params)
 	plt.plot(x, y, color = 'r', label='Model')
 	plt.legend(loc='best', fontsize=20)
