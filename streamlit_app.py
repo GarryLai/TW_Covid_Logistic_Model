@@ -14,7 +14,7 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 st.title('台灣Covid-19疫情推估模式')
 st.error('請注意：本模式僅作為學術討論用途，請勿轉載本站任何資訊或圖表，確切疫情資訊請以CDC為準！')
 st.info('資料來源：國網中心 (https://covid-19.nchc.org.tw/)')
-st.info('推估模式：Logistic Function (https://en.wikipedia.org/wiki/Logistic_function)')
+st.info('推估模式：Generalised logistic function (https://en.wikipedia.org/wiki/Generalised_logistic_function) (0504更新)')
 
 date = []
 diagnosed = []
@@ -35,11 +35,11 @@ x = np.arange(0, len(date))
 today = len(date) - 1
 days = len(date) + 90
 
-def logistic_curve(x, a, b, c, d):
-	return (a / (1 + np.exp(-c * (x - d)))) + b
+def logistic_curve(x, a, b, c, d, i):
+	return (a / np.power(1 + i * np.exp(-c * (x - d)), i)) + b
 	
-p0 = [total[-1], 1, 0.1, len(date) // 2]
-logistic_params, covariance = curve_fit(logistic_curve, x, total, p0=p0)
+p0 = [total[-1], 1, 0.1, len(date) // 2, 2.5]
+logistic_params, covariance = curve_fit(logistic_curve, x, total)
 #print('logistic params=', logistic_params)
 
 def plot1(x, logistic_params, covariance):
