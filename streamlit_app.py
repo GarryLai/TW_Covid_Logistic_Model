@@ -78,7 +78,7 @@ def plot2(x, logistic_params, covariance):
 	st.pyplot()
 	
 def forcast(t):
-	return (logistic_curve(today + t, *logistic_params) - logistic_curve(today - 1 + t, *logistic_params)) * 7 - (logistic_curve(today - 1 + t, *logistic_params) - logistic_curve(today - 7 + t, *logistic_params))
+	return (logistic_curve(today + t, *logistic_params) - logistic_curve(today - 1 + t, *logistic_params)) * 7 - (logistic_curve(today - 1 + t, *logistic_params) - logistic_curve(today - 6 + t, *logistic_params))
 
 st.warning('初始條件：' + str(date[0]) + '～' + str(date[-1]))
 
