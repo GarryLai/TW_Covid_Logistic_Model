@@ -25,11 +25,11 @@ data = res.json()
 
 for i in data[::-1]:
 	date.append(datetime.strptime(i['a01'], "%Y-%m-%d").date())
-	diagnosed.append(float(i['a06']))
+	diagnosed.append(float(i['a07']))
 	if len(total) > 0:
-		total.append(total[-1] + float(i['a06']))
+		total.append(total[-1] + float(i['a07']))
 	else:
-		total.append(float(i['a06']))
+		total.append(float(i['a07']))
 	
 x = np.arange(0, len(date))
 today = len(date) - 1
