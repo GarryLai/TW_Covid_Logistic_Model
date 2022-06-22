@@ -40,7 +40,7 @@ def logistic_curve(x, a, b, c, d, i):
 	return (a / np.power(1 + i * np.exp(-c * (x - d)), i)) + b
 	
 p0 = [total[-1], 1, 0.1, len(date) // 2, 2.5]
-logistic_params, covariance = curve_fit(logistic_curve, x, total)
+logistic_params, covariance = curve_fit(logistic_curve, x, total, maxfev=20000)
 #print('logistic params=', logistic_params)
 
 def plot1(x, logistic_params, covariance):
